@@ -9,11 +9,10 @@
 
 #include "GameController.h"
 #include "Rendering/GL/myGL.h"
-#include "System/LoadSave/LoadSaveHandler.h"
-#include "System/OffscreenGLContext.h"
 #include "myTime.h"
-
-
+///forward class declaration
+class ILoadSaveHandler;
+class COffscreenGLThread;
 class CLoadScreen : public CGameController
 {
 public:

@@ -35,7 +35,7 @@ private:
 	HDC hdc;
 	HGLRC offscreenRC;
 #elif __APPLE__
-	AGLPixelFmtID pxlfmt;
+	AGLPixelFormat pxlfmt;
 	AGLContext workerCtx;
 	AGLDrawable drawable;
 #else

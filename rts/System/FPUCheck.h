@@ -67,8 +67,8 @@ static inline void good_fpu_control_registers(const char* text)
 	// We are paranoid.
 	// We don't trust the enumeration constants from streflop / (g)libc.
 #if defined(STREFLOP_SSE)
-	fenv_t fenv;
-	fegetenv(&fenv);
+	streflop::fenv_t fenv;
+	streflop::fegetenv(&fenv);
 
 	#if defined(__SUPPORT_SNAN__) && !defined(USE_GML)	// -fsignaling-nans
 	bool ret = ((fenv.sse_mode & 0xFF80) == (0x1937 & 0xFF80) || (fenv.sse_mode & 0xFF80) == (0x1925 & 0xFF80)) &&
@@ -105,5 +105,4 @@ static inline void good_fpu_control_registers(const char* text)
 	}
 #endif
 }
-
 #endif // !FPUCHECK_H

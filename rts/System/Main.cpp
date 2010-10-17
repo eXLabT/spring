@@ -65,17 +65,25 @@ void MainFunc(int argc, char** argv, int* ret) {
 int Run(int argc, char* argv[])
 {
 	int ret = 0;
-
+#if 1
+/*	boost::thread* mainThread = &boost::this_thread;
+	Threading::SetMainThread(mainThread);
+*/
+	SpringApp app;
+	ret = app.Run(argc, argv);
+#else
 	boost::thread* mainThread = new boost::thread(boost::bind(&MainFunc, argc, argv, &ret));
 	Threading::SetMainThread(mainThread);
 	mainThread->join();
 	delete mainThread;
-
+#endif
 	return ret;
 }
 
 
-
+#if !defined(HEADLESS)
+#include <SDL.h>
+#endif
 /**
  * @brief main
  * @return exit code

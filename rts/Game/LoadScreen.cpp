@@ -29,6 +29,8 @@
 #include "System/Platform/CrashHandler.h"
 #include "System/Sound/ISound.h"
 #include "System/Sound/IMusicChannel.h"
+#include "System/LoadSave/LoadSaveHandler.h"
+#include "System/OffscreenGLThreadMgr.h"
 
 
 /******************************************************************************/
@@ -86,7 +88,7 @@ void CLoadScreen::Init()
 	try {
 		//! Create the Game Loading Thread
 		if (mt_loading)
-			gameLoadThread = new COffscreenGLThread( boost::bind(&CGame::LoadGame, game, mapName) );
+			gameLoadThread = CreateOffscreenGLThread( boost::bind(&CGame::LoadGame, game, mapName) );
 
 	} catch (opengl_error& gle) {
 		//! Offscreen GL Context creation failed,
@@ -104,11 +106,10 @@ void CLoadScreen::Init()
 		initOk = true;
 	}
 }
-
-
 CLoadScreen::~CLoadScreen()
 {
-	delete gameLoadThread;
+	//delete gameLoadThread;
+	DestroyOffscreenGLThread( gameLoadThread );
 
 	net->loading = false;
 	netHeartbeatThread->join();
@@ -133,6 +134,8 @@ CLoadScreen::~CLoadScreen()
 		activeController = game;
 	}
 }
+
+
 
 
 CLoadScreen* CLoadScreen::singleton = NULL;

@@ -5,8 +5,7 @@
 
 #include <string>
 #include <boost/cstdint.hpp>
-#include "System/OffscreenGLContext.h"
-
+class COffscreenContext; 
 class BaseCmd;
 class CGameController;
 union SDL_Event;
@@ -114,7 +113,7 @@ protected:
 	 */
 	int lastRequiredDraw;
 
-	COffscreenGLContext *ogc;
+	COffscreenContext *ogc;
 
 private:
 	bool MainEventHandler(const SDL_Event& ev);

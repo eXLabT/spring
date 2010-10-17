@@ -52,6 +52,15 @@ Makefile
 /AI/Skirmish/NTai/AI/Release
 /AI/Skirmish/NTai/AI/AI.ncb
 /AI/Skirmish/NTai/AI/AI.suo
+AI/Interfaces/Java/myGeneratedSourceDir.stub
+AI/Interfaces/Java/sourceFiles.txt
+AI/Interfaces/Java/src-generated/
+AI/Skirmish/NullJavaAI/sourceFiles.txt
+AI/Skirmish/NullOOJavaAI/sourceFiles.txt
+AI/Wrappers/Cpp/src-generated/
+AI/Wrappers/JavaOO/myClasses.stub
+AI/Wrappers/JavaOO/sourceFiles.txt
+AI/Wrappers/JavaOO/src-generated/
 
 # Windows libraries used by spring when compiling with MinGW
 # recommended: place the dir somewhere else, and specify with
@@ -67,6 +76,7 @@ Makefile
 /installer/TASClient
 /installer/downloads
 /installer/custom_defines.nsi
+/installer/bin
 
 # Java AI related
 /AI/Interfaces/Java/build
@@ -82,9 +92,19 @@ Makefile
 *.dir
 *.class
 *.orig
+*.so
+*.dylib
+*.jar
+*.diff
 
 # ???
 progress.make
+cmake_install.cmake
+install_manifest.txt
+spring
+engine-dedicated
+spring-headless
+spring-multithreaded
 
 #buildbot generated dirs
 /build-*
@@ -92,3 +112,5 @@ progress.make
 #installer downloaded/generated stuff
 /installer/Springlobby/
 /installer/*.exe
+#local self test folder
+/SDLTest

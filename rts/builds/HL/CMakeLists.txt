@@ -23,6 +23,7 @@ IF    (MINGW OR APPLE)
 	FIND_PACKAGE(GLU REQUIRED)
 	FIND_PACKAGE(SDL REQUIRED)
 	INCLUDE_DIRECTORIES(${SDL_INCLUDE_DIR})
+	INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
 ELSE  (MINGW OR APPLE)
 	# Use a direct copy of the GL and SDL headers,
 	# as these may not be available on headless systems.

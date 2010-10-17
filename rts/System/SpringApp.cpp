@@ -61,7 +61,7 @@
 #include "System/Platform/CrashHandler.h"
 #include "System/Platform/Threading.h"
 #include "System/Sound/ISound.h"
-
+#include "System/OffscreenContext.h"
 #include "mmgr.h"
 
 #ifdef WIN32
@@ -1176,7 +1176,7 @@ int SpringApp::Run(int argc, char *argv[])
 	gmlKeepRunning=1;
 	gmlStartSim=0;
 	if(GML_SHARE_LISTS)
-		ogc = new COffscreenGLContext();
+		ogc = new COffscreenContext();
 	gmlProcessor->AuxWork(&SpringApp::Simcb,this); // start sim thread
 #	endif
 #endif
@@ -1188,6 +1188,7 @@ int SpringApp::Run(int argc, char *argv[])
 			SCOPED_TIMER("Input");
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) {
+//	logOutput.Print("push event: 0x%08x", event.type);
 				input.PushEvent(event);
 			}
 		}

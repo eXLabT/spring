@@ -4,10 +4,8 @@
 #include "OffscreenGLContext.h"
 
 #include "Exceptions.h"
-#include "FPUCheck.h"
 #include "LogOutput.h"
 #include "maindefines.h"
-#include "lib/streflop/streflop_cond.h"
 #include "System/Platform/errorhandler.h"
 
 
@@ -83,7 +81,7 @@ void COffscreenGLContext::WorkerThreadFree()
 #elif __APPLE__
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //! APPLE
-
+#define aglChoosePixelFmt aglChoosePixelFormat
 COffscreenGLContext::COffscreenGLContext()
 {
 	//FIXME: couldn't test this code myself! (coded from online documentations)

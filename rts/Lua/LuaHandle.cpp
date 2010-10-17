@@ -291,7 +291,7 @@ int CLuaHandle::RunCallInTraceback(int inArgs, int outArgs, int errfuncIndex, st
 			lua_remove(L, errfuncIndex);
 		}
 	} else {
-		traceback = lua_tostring(L, -1);
+		traceback = lua_tostring(L, -1) ? lua_tostring(L,-1):"NULL";
 		lua_pop(L, 1);
 		if (errfuncIndex != 0)
 			lua_remove(L, errfuncIndex);
