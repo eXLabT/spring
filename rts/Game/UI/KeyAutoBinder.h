@@ -9,9 +9,9 @@
 
 #include "Lua/LuaHandle.h"
 
-
 struct UnitDef;
 struct lua_State;
+
 
 class CKeyAutoBinder : public CLuaHandle
 {
@@ -26,8 +26,8 @@ class CKeyAutoBinder : public CLuaHandle
 
 	private:
 		string LoadFile(const string& filename) const;
-		bool LoadCode(lua_State *L, const string& code, const string& debug);
-		bool LoadCompareFunc(lua_State *L);
+		bool LoadCode(const string& code, const string& debug);
+		bool LoadCompareFunc();
 		string MakeRequirementCall(const vector<string>& requirements);
 		string MakeSortCriteriaCall(const vector<string>& sortCriteria);
 		string AddUnitDefPrefix(const string& text, const string& pre) const;
@@ -38,14 +38,14 @@ class CKeyAutoBinder : public CLuaHandle
 	private:
 		class UnitDefHolder {
 			public:
+				UnitDefHolder(int udID, const UnitDef* ud) : udID(udID), ud(ud) {}
 				bool operator<(const UnitDefHolder&) const;
-			public:
+
 				int udID;
 				const UnitDef* ud;
 		};
 
 	friend class CKeyAutoBinder::UnitDefHolder;
 };
-
 
 #endif /* KEY_AUTO_BINDER_H */

@@ -19,6 +19,7 @@
 #include "Game.h"
 #include "Camera.h"
 #include "CameraHandler.h"
+#include "ChatMessage.h"
 #include "ClientSetup.h"
 #include "ConsoleHistory.h"
 #include "GameHelper.h"
@@ -30,7 +31,6 @@
 #include "SelectedUnits.h"
 #include "PlayerHandler.h"
 #include "PlayerRoster.h"
-#include "ChatMessage.h"
 #include "TimeProfiler.h"
 #include "WaitCommandsAI.h"
 #include "WordCompletion.h"
@@ -132,6 +132,7 @@
 #include "System/FPUCheck.h"
 #include "System/NetProtocol.h"
 #include "System/SpringApp.h"
+#include "System/Util.h"
 #include "System/FileSystem/ArchiveScanner.h"
 #include "System/FileSystem/FileSystem.h"
 #include "System/FileSystem/VFSHandler.h"
@@ -244,7 +245,6 @@ CGame::CGame(const std::string& mapname, const std::string& modName, ILoadSaveHa
 	timeLeft(0.0f),
 	consumeSpeed(1.0f),
 	luaDrawTime(0),
-	luaUIDrawFrame(0),
 
 	saveFile(saveFile)
 {
@@ -1212,10 +1212,6 @@ bool CGame::Draw() {
 #endif
 	GML_STDMUTEX_LOCK(draw); //Draw
 
-#if DUAL_LUA_STATES
-	while(luaUIDrawFrame < gs->frameNum)
-		luaUI->GameFrame(luaUIDrawFrame++);
-#endif
 	//! timings and frame interpolation
 	const unsigned currentTime = SDL_GetTicks();
 
@@ -2422,6 +2418,7 @@ bool CGame::HasLag() const
 	}
 }
 
+
 void CGame::SaveGame(const std::string& filename, bool overwrite)
 {
 	if (filesystem.CreateDirectory("Saves")) {
@@ -2438,6 +2435,7 @@ void CGame::SaveGame(const std::string& filename, bool overwrite)
 		}
 	}
 }
+
 
 void CGame::ReloadGame()
 {

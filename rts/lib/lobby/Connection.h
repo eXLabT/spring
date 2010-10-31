@@ -8,6 +8,7 @@
 #include <boost/asio/ip/tcp.hpp>
 #include <string>
 #include <list>
+
 struct ClientStatus
 {
 	bool ingame;

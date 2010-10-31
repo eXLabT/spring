@@ -3,6 +3,7 @@
 #ifndef __GAME_SERVER_H__
 #define __GAME_SERVER_H__
 
+#include <boost/thread/recursive_mutex.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <string>
@@ -17,8 +18,6 @@
 #include "UnsyncedRNG.h"
 #include "float3.h"
 #include "System/myTime.h"
-#include "System/Platform/Synchro.h"
-
 
 namespace netcode
 {
@@ -134,7 +133,7 @@ private:
 
 	void AddToPacketCache(boost::shared_ptr<const netcode::RawPacket> &pckt);
 
-	void AdjustPlayerNumber(const unsigned char msg, unsigned char &player);
+	bool AdjustPlayerNumber(netcode::RawPacket *buf, int pos, int val = -1);
 	void UpdatePlayerNumberMap();
 
 	float GetDemoTime();
@@ -221,7 +220,7 @@ private:
 	boost::scoped_ptr<AutohostInterface> hostif;
 	UnsyncedRNG rng;
 	boost::thread* thread;
-	mutable Threading::RecursiveMutex gameServerMutex;
+	mutable boost::recursive_mutex gameServerMutex;
 	typedef std::set<unsigned char> PlayersToForwardMsgvec;
 	typedef std::map<unsigned char, PlayersToForwardMsgvec> MsgToForwardMap;
 	MsgToForwardMap relayingMessagesMap;
